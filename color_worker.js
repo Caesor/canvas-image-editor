@@ -27,7 +27,7 @@
     document.getElementById("redChannel").onchange = function () {
         var local = ctx.getImageData(0, 0, width, height);
         var level = this.value / 10;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (var i = 0; i < local.data.length; i += 4) {
             local.data[i] = current.data[i] + (255 - current.data[i]) * level;
         }
         ctx.putImageData(loca, 0, 0, 0, 0, width, height);
