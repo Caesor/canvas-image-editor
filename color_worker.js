@@ -32,57 +32,57 @@
         }
         ctx.putImageData(local, 0, 0, 0, 0, width, height);
         this.onblur = function(){
-            current = loca;
+            current = local;
         }
     }
 
     document.getElementById("greenChannel").onchange = function () {
-        var local = canvas.getImageData(0, 0, width, height),
+        var local = ctx.getImageData(0, 0, width, height),
         level = this.value / 10;
         for (var i = 0; i < current.data.length; i += 4) {
             local.data[i + 1] = current.data[i + 1] + (255 - current.data[i + 1]) * level;
         }
-        canvas.putImageData(local, 0, 0, 0, 0, width, height);
+        ctx.putImageData(local, 0, 0, 0, 0, width, height);
         this.onblur = function () {
             current = local;
         }
     }
 
     document.getElementById("blueChannel").onchange = function () {
-        var local = canvas.getImageData(0, 0, width, height),
+        var local = ctx.getImageData(0, 0, width, height),
         level = this.value / 10;
         for (var i = 0; i < current.data.length; i += 4) {
             local.data[i + 2] = current.data[i + 2] + (255 - current.data[i + 2]) * level;
         }
-        canvas.putImageData(local, 0, 0, 0, 0, width, height);
+        ctx.putImageData(local, 0, 0, 0, 0, width, height);
         this.onblur = function () {
             current = local;
         }
     }
 
     document.getElementById("brightChannel").onchange = function () {
-        var local = canvas.getImageData(0, 0, width, height),
+        var local = ctx.getImageData(0, 0, width, height),
           level = this.value * 25;
         for (var i = 0; i < current.data.length; i += 4) {
             local.data[i] = current.data[i] + level;
             local.data[i + 1] = current.data[i + 1] + level;
             local.data[i + 2] = current.data[i + 2] + level;
         }
-        canvas.putImageData(local, 0, 0, 0, 0, width, height);
+        ctx.putImageData(local, 0, 0, 0, 0, width, height);
         this.onblur = function () {
             current = local;
         }
     }
 
     document.getElementById("greyChannel").onchange = function () {
-        var local = canvas.getImageData(0, 0, width, height),
+        var local = ctx.getImageData(0, 0, width, height),
           level = this.value / 10;
         for (var i = 0; i < current.data.length; i += 4) {
             local.data[i] = current.data[i] + (255 - current.data[i]) * level;
             local.data[i + 1] = current.data[i + 1] + (255 - current.data[i + 1]) * level;
             local.data[i + 2] = current.data[i + 2] + (255 - current.data[i + 2]) * level;
         }
-        canvas.putImageData(local, 0, 0, 0, 0, width, height);
+        ctx.putImageData(local, 0, 0, 0, 0, width, height);
         this.onblur = function () {
             current = local;
         }
