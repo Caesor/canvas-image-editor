@@ -30,7 +30,7 @@
         for (var i = 0; i < local.data.length; i += 4) {
             local.data[i] = current.data[i] + (255 - current.data[i]) * level;
         }
-        ctx.putImageData(loca, 0, 0, 0, 0, width, height);
+        ctx.putImageData(local, 0, 0, 0, 0, width, height);
         this.onblur = function(){
             current = loca;
         }
