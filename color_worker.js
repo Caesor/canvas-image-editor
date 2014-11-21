@@ -1,6 +1,9 @@
 (function() {
     var img = new Image();
     var canvas = document.getElementById("cvs");
+    var original = null;
+    var current = null;
+
     var ctx = canvas.getContext("2d");
     var width = 0;
     var height = 0;
@@ -18,22 +21,24 @@
         	height = document.getElementById("cvs").height = img.height;
     	}
         ctx.drawImage(img, 0, 0, width, height);
-      //  localStorage.setItem( "savedImageData", canvas.toDataURL("image/png") );
+        current = original = ctx.getImageData(0 ,0, width, height);
     }
 
     document.getElementById("redChannel").onchange = function () {
-        //alert(ctx.getImageData(0, 0, width, height))
-        var imgData = ctx.getImageData(0, 0, width, height);
+        var local = ctx.getImageData(0, 0, width, height);
         var level = this.value / 10;
         for (var i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i] = imgData.data[i] + (255 - imgData.data[i]) * level;
+            local.data[i] = current.data[i] + (255 - current.data[i]) * level;
         }
-        ctx.putImageData(local, 0, 0, 0, 0, width, height);
+        ctx.putImageData(loca, 0, 0, 0, 0, width, height);
+        this.onblur = function(){
+            current = loca;
+        }
     }
 
     document.getElementById("greenChannel").onchange = function () {
         var local = canvas.getImageData(0, 0, width, height),
-          level = this.value / 10;
+        level = this.value / 10;
         for (var i = 0; i < current.data.length; i += 4) {
             local.data[i + 1] = current.data[i + 1] + (255 - current.data[i + 1]) * level;
         }
@@ -45,7 +50,7 @@
 
     document.getElementById("blueChannel").onchange = function () {
         var local = canvas.getImageData(0, 0, width, height),
-          level = this.value / 10;
+        level = this.value / 10;
         for (var i = 0; i < current.data.length; i += 4) {
             local.data[i + 2] = current.data[i + 2] + (255 - current.data[i + 2]) * level;
         }
