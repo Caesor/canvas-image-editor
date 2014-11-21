@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		html,body{ margin:0; padding:0; height:100%; background-color:#222}
+	    #stage{ width:68%; height:100%; background-color:#ddd; float:left; text-align:center;}
+	    #cvs{}
+	    #control{ width:30%;height:100%; float:left; background-color:#222}
+	    #control dl,#notice{ margin:15px auto; width:200px; background-color:#444; padding:5px;-webkit-border-radius:3px;-moz-border-radius:3px}
+	    #control dt{ font-size:12px; color:#fff}
+	    #notice{ font-size:12px; color:#9e5656; background-color:#f6f5bd; margin-top:40px; border:1px solid #9e8a56}
+	</style>
+</head>
+<body>
+	<section id="stage">
+		<canvas id="cvs"></canvas>	
+	</section>
+	<aside id="control">
+		<dl>
+		    <dt>红通道：</dt>
+		    <dd><input type="range" min="-10" max="10" step="1" value="0" id="redChannel" /></dd>
+		</dl>
+		<dl>
+		    <dt>绿通道：</dt>
+		    <dd><input type="range" min="-10" max="10" step="1" value="0" id="greenChannel"/></dd>
+		</dl>
+		<dl>
+		    <dt>蓝通道：</dt>
+		    <dd><input type="range" min="-10" max="10" step="1" value="0" id="blueChannel"/></dd>
+		</dl>
+		<dl>
+		    <dt>亮度：</dt>
+		    <dd><input type="range" min="-8" max="8" step="0.5" value="0" id="brightChannel"/></dd>
+		</dl>
+		<dl>
+		    <dt>明度：</dt>
+		    <dd><input type="range" min="-10" max="10" step="1" value="0" id="greyChannel"/></dd>
+		</dl>
+
+	</aside>
+	<script type="text/javascript" src="color_worker.js"></script>
+</body>
+</html>
