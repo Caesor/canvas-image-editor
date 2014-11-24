@@ -1,0 +1,22 @@
+*{margin:0; padding:0;}
+html,body{height:100%;}
+
+nav{width: 100%;background: #181818;font-family: sans-serif;font-size: 16px;}
+nav ul{overflow: hidden;}
+nav ul li{list-style-type: none;float: left;border-left:1px solid #ccc;margin:10px 0;}
+nav ul li:first-child{border-left:none;}
+nav ul li a{display:block;height:30px;line-height: 30px;padding: 0 20px;color:#c1c1c1;text-decoration: none;}
+nav ul li a:hover{color:#fff;}
+#open_file{display:none;}
+
+.content{display: -moz-box; display: -webkit-box; direction: box;}
+#stage{-moz-box-flex:1;-webkit-box-flex:1;box-flex:1;height:100%; background-color:#ddd;text-align:center;overflow: scroll;}
+#stage canvas{}
+aside{ -moz-box-flex:0;-webkit-box-flex:0;box-flex:0;width:250px;height:100%;background-color:#ccc;color:#2D2E2F;overflow: scroll;}
+aside h3{background: #B2BBBE;line-height: 35px;height: 35px;border-bottom: 1px solid #D1D4D7;padding:0 10px;cursor: pointer;}
+#control h3 i{display:block;font-size: 12px;float: right;line-height: 35px;height: 35px;}
+aside ul{margin:0 20px 10px 20px;list-style-type: none;}
+aside ul.hide{display: none;}
+aside ul li{margin: 10px 0;}
+aside ul li p{font-family: sans-serif;padding: 10px 0;}
+aside ul li input[type="number"]{width: 60px;}

@@ -1,45 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title></title>
-	<style type="text/css">
-		html,body{ margin:0; padding:0; height:100%; background-color:#222}
-	    #stage{ width:68%; height:100%; background-color:#ddd; float:left; text-align:center;}
-	    #cvs{}
-	    #control{ width:30%;height:100%; float:left; background-color:#222}
-	    #control dl,#notice{ margin:15px auto; width:200px; background-color:#444; padding:5px;-webkit-border-radius:3px;-moz-border-radius:3px}
-	    #control dt{ font-size:12px; color:#fff}
-	    #notice{ font-size:12px; color:#9e5656; background-color:#f6f5bd; margin-top:40px; border:1px solid #9e8a56}
-	</style>
+	<meta charset=utf-8>
+	<meta name=description content="editing picture using canvas">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<title>Pictuer Editor</title>
+	<link type="text/css" rel="stylesheet" href="resource/font-awesome-4.2.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="resource/color_worker.css">
 </head>
 <body>
-	<section id="stage">
-		<canvas id="cvs"></canvas>	
+	<nav>
+		<ul>
+			<li><a href="javascript:;" id="open_file_btn"><i class="fa fa-folder-open-o"></i> Open</a><input type="file" id="open_file"></li>
+			<li><a href="javascript:;" id="save_image"><i class="fa fa-floppy-o"></i> Save</a></li>
+			<li><a href="javascript:;" id="show_exif"><i class="fa fa-cog"></i> Exif</a></li>
+		</ul>
+	</nav>
+	<section class="content">
+		<section id="stage">
+			<canvas id="cvs"></canvas>	
+		</section>
+		<aside id="control">
+			<h3 state="0">Size <i class="fa fa-plus"></i></h3>
+			<ul>
+			    <li>
+					<i class="fa fa-search-minus"></i>
+					<input type="range" min="12.50%" max="800%" step="1" value="100%" id="size" class="channel"/>
+					<i class="fa fa-search-plus"></i>
+				</li>
+				<li>
+					<label><input type="radio" name="size"/> Original Size:</label>
+				</li>
+				<li>
+					<label><input type="radio" name="size"/> Custom:</label>
+					<p><input type="number" id="custom_width"/> * <input type="number" id="custom_height"/> (pixel)</p>
+				</li>
+				<li><label><input type="checkbox" id="proportion" checked /> Fixed ratio</label></li>
+				<li>
+			    	<input type="button" id="sure" value="Yes"/>
+			    </li>
+			</ul>
+			<h3 state="0">Channel <i class="fa fa-plus"></i></h3>
+			<ul class="hide">
+			    <li>
+			    	<p>Red Channel:</p>
+			    	<input type="range" min="-10" max="10" step="1" value="0" id="redChannel" class="channel"/>
+			    	<input type="number" min="-10" max="10" value="0" id="channel_value"/>
+			    </li>
+			    <li>
+			    	<p>Green Channel:</p>
+			    	<input type="range" min="-10" max="10" step="1" value="0" id="greenChannel" class="channel"/>
+			    	<input type="number" min="-10" max="10" step="1" value="0" id="greenChannel_input"/>
+			    </li>
+			    <li>
+			    	<p>Blue Channel:</p>
+			    	<input type="range" min="-10" max="10" step="1" value="0" id="blueChannel" class="channel"/>
+			    	<input type="number" min="-10" max="10" step="1" value="0" id="blueChannel_input"/>
+			    </li>
+			    <li>
+			    	<p>Bright:</p>
+			    	<input type="range" min="-8" max="8" step="0.5" value="0" id="brightChannel" class="channel"/>
+			    	<input type="number" min="-10" max="10" step="1" value="0" id="brightChannel_input"/>
+			    </li>
+			    <li>
+			    	<p>Gray:</p>
+			    	<input type="range" min="-10" max="10" step="1" value="0" id="greyChannel" class="channel"/>
+			    	<input type="number" min="-10" max="10" step="1" value="0" id="greyChannel_input"/>
+			    </li>
+			</ul>
+			<h3 state="0">Fliter <i class="fa fa-plus"></i></h3>
+			<ul>
+			    <li></li>
+			    <li></li>
+			    <li></li>
+			    <li></li>
+			</ul>
+		</aside>
 	</section>
-	<aside id="control">
-		<dl>
-		    <dt>红通道：</dt>
-		    <dd><input type="range" min="-10" max="10" step="1" value="0" id="redChannel" /></dd>
-		</dl>
-		<dl>
-		    <dt>绿通道：</dt>
-		    <dd><input type="range" min="-10" max="10" step="1" value="0" id="greenChannel"/></dd>
-		</dl>
-		<dl>
-		    <dt>蓝通道：</dt>
-		    <dd><input type="range" min="-10" max="10" step="1" value="0" id="blueChannel"/></dd>
-		</dl>
-		<dl>
-		    <dt>亮度：</dt>
-		    <dd><input type="range" min="-8" max="8" step="0.5" value="0" id="brightChannel"/></dd>
-		</dl>
-		<dl>
-		    <dt>明度：</dt>
-		    <dd><input type="range" min="-10" max="10" step="1" value="0" id="greyChannel"/></dd>
-		</dl>
-
-	</aside>
-	<script type="text/javascript" src="color_worker.js"></script>
+	<script src="resource/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="resource/color_worker.js"></script>
 </body>
 </html>

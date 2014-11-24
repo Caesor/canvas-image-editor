@@ -1,4 +1,19 @@
 (function() {
+    //strench the background of content
+	$(".content").height($(window).height() - $("nav").height());
+
+    //Control menu accordion style
+    $("#control h3").click(function(){
+        $(this).next("ul").slideToggle();
+        if($(this).attr('state') == 0){
+            $(this).attr("state",1);
+            $(this).children('i').removeClass("fa-plus").addClass('fa-minus');    
+        }else{
+            $(this).attr("state",0);
+            $(this).children('i').removeClass("fa-minus").addClass('fa-plus');
+        }
+        
+    })
     var img = new Image();
     var canvas = document.getElementById("cvs");
     var original = null;
@@ -9,7 +24,7 @@
     var height = 0;
     var board = document.getElementById('stage');
 
-    img.src = "9.jpg";
+    img.src = "img/9.jpg";
 
     img.onload = function () {
        var proportion = img.height / img.width;
@@ -24,6 +39,30 @@
         current = original = ctx.getImageData(0 ,0, width, height);
     }
 
+    //load image
+    var input = document.getElementById('open_file');
+    if(typeof FileReader === 'undefined'){
+        input.setAttribute('disabled','disabled');
+    }else{
+        input.addEventListener('change',readFile, false);
+    }
+    function readFile(){
+        var file = this.files[0];
+        if(!/image\/\w+/.test(file.type)){
+            alert("Only Image File");            
+            return false;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(){
+            ctx.clearRect(0,0,width, height);
+            img.src = this.result;
+            img.onload();
+        }
+    }
+    document.getElementById("open_file_btn").onclick = function(){
+    	document.getElementById('open_file').click();
+    }
     document.getElementById("redChannel").onchange = function () {
         var local = ctx.getImageData(0, 0, width, height);
         var level = this.value / 10;
@@ -87,5 +126,39 @@
             current = local;
         }
     }
+
+    document.getElementById("save_image").onclick = function(){
+        var mask = document.createElement("div");
+        mask.id = "mask";
+        mask.style.background = 'rgba(0,0,0,0.9)';
+        mask.style.position = 'absolute';
+        mask.style.zIndex = 9;
+        mask.style.left = 0;
+        mask.style.top = 0;
+        mask.style.right = 0;
+        mask.style.bottom = 0;
+        document.body.appendChild(mask);
+
+        var curImg = document.createElement('img');
+        curImg.id = 'curImg';
+        curImg.style.zIndex = 10;
+        curImg.style.position = 'absolute';
+        curImg.src = document.getElementById('cvs').toDataURL("image/png");
+        mask.appendChild(curImg);
+        curImg.onload = function(){
+            this.style.left = (document.body.clientWidth - this.offsetWidth) / 2 + 'px';
+            this.style.top = (document.body.clientHeight - this.offsetHeight) / 2 + 'px';       
+        }
+        mask.onclick = function(){
+            this.style.display = 'none';
+        }
+    }
+
+    $(".channel").change(function(){
+    	$(this).next().val($(this).val());
+    })
+    $(".channel_value").change(function(){
+    	$(this).prev().val($(this).val())
+    })
 })()
 
